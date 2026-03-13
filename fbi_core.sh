@@ -46,14 +46,14 @@ run_command() {
 
 canshu_v6() {
 	if grep -q '^canshu="V6"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^canshu="default"/canshu="V6"/' ~/fbi.sh
+		sed -i 's/^canshu="default"/canshu="V6"/' ~/FBI 专属工具箱
 	fi
 }
 
 
 CheckFirstRun_true() {
 	if grep -q '^permission_granted="true"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/FBI 专属工具箱
 	fi
 }
 
@@ -87,7 +87,7 @@ send_stats() {
 yinsiyuanquan2() {
 
 if grep -q '^ENABLE_STATS="false"' /usr/local/bin/k > /dev/null 2>&1; then
-	sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
+	sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI 专属工具箱
 fi
 
 }
@@ -102,8 +102,8 @@ yinsiyuanquan2
 sed -i '/^alias k=/d' ~/.bashrc > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.profile > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.bash_profile > /dev/null 2>&1
-cp -f ./fbi.sh ~/fbi.sh > /dev/null 2>&1
-cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
+cp -f ./FBI 专属工具箱 ~/FBI 专属工具箱 > /dev/null 2>&1
+cp -f ~/FBI 专属工具箱 /usr/local/bin/k > /dev/null 2>&1
 ln -sf /usr/local/bin/k /usr/bin/k > /dev/null 2>&1
 
 
@@ -126,7 +126,7 @@ UserLicenseAgreement() {
 
 	if [ "$user_input" = "y" ] || [ "$user_input" = "Y" ]; then
 		send_stats "许可同意"
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/FBI 专属工具箱
 		sed -i 's/^permission_granted="false"/permission_granted="true"/' /usr/local/bin/k
 	else
 		send_stats "许可拒绝"
@@ -356,7 +356,7 @@ break_end() {
 
 fbi() {
 			cd ~
-			fbi_sh
+			FBI 专属工具箱
 }
 
 
@@ -3246,7 +3246,7 @@ f2b_basic_config() {
 	mkdir -p /etc/fail2ban/jail.d
 	cat > /etc/fail2ban/jail.d/sshd.local <<EOF
 [$jail_name]
-# Managed by fbi.sh
+# Managed by FBI 专属工具箱
 # Note: enable the jail so these parameters take effect
 enabled = true
 bantime = $bantime
@@ -14126,7 +14126,7 @@ while true; do
 	  echo -e "${gl_kjlan}113. ${color113}Firefox浏览器                       ${gl_kjlan}114. ${color114}OpenClaw机器人管理工具${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}-------------------------"
 	  echo -e "${gl_kjlan}第三方应用列表"
-  	  echo -e "${gl_kjlan}想要让你的应用出现在这里？查看开发者指南: ${gl_huang}https://dev.fbi.sh/${gl_bai}"
+  	  echo -e "${gl_kjlan}想要让你的应用出现在这里？查看开发者指南: ${gl_huang}https://dev.FBI 专属工具箱/${gl_bai}"
 
 	  for f in "$HOME"/apps/*.conf; do
 		  [ -e "$f" ] || continue
@@ -19527,7 +19527,7 @@ EOF
 			send_stats "留言板"
 			echo "访问科技lion官方留言板，您对脚本有任何想法欢迎留言交流！"
 			echo "https://board.kejilion.pro"
-			echo "公共密码: fbi.sh"
+			echo "公共密码: FBI 专属工具箱"
 			  ;;
 
 		  66)
@@ -19651,14 +19651,14 @@ EOF
 				  1)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
+					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI 专属工具箱
 					  echo "已开启采集"
 					  send_stats "隐私与安全已开启采集"
 					  ;;
 				  2)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
+					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI 专属工具箱
 					  echo "已关闭采集"
 					  send_stats "隐私与安全已关闭采集"
 					  ;;
@@ -19685,9 +19685,9 @@ EOF
 			  case "$choice" in
 				[Yy])
 				  clear
-				  (crontab -l | grep -v "fbi.sh") | crontab -
+				  (crontab -l | grep -v "FBI 专属工具箱") | crontab -
 				  rm -f /usr/local/bin/k
-				  rm ~/fbi.sh
+				  rm ~/FBI 专属工具箱
 				  echo "脚本已卸载，再见！"
 				  break_end
 				  clear
@@ -20110,7 +20110,7 @@ echo -e "${gl_kjlan}B站: ${gl_bai}https://b23.tv/2mqnQyh              ${gl_kjla
 echo -e "${gl_kjlan}官网: ${gl_bai}https://kejilion.pro/              ${gl_kjlan}导航: ${gl_bai}https://dh.kejilion.pro/${gl_bai}"
 echo -e "${gl_kjlan}博客: ${gl_bai}https://blog.kejilion.pro/         ${gl_kjlan}软件中心: ${gl_bai}https://app.kejilion.pro/${gl_bai}"
 echo "------------------------"
-echo -e "${gl_kjlan}脚本官网: ${gl_bai}https://fbi.sh            ${gl_kjlan}GitHub地址: ${gl_bai}${gh_https_url}github.com/hanbing3/jiaoben${gl_bai}"
+echo -e "${gl_kjlan}脚本官网: ${gl_bai}https://FBI 专属工具箱            ${gl_kjlan}GitHub地址: ${gl_bai}${gh_https_url}github.com/hanbing3/jiaoben${gl_bai}"
 echo "------------------------"
 echo ""
 }
@@ -20200,7 +20200,7 @@ while true; do
 	fi
 
 
-	local cron_job="fbi.sh"
+	local cron_job="FBI 专属工具箱"
 	local existing_cron=$(crontab -l 2>/dev/null | grep -F "$cron_job")
 
 	if [ -n "$existing_cron" ]; then
@@ -20219,18 +20219,18 @@ while true; do
 			clear
 			local country=$(curl -s ipinfo.io/country)
 			if [ "$country" = "CN" ]; then
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/cn/fbi_core.sh && chmod +x fbi.sh
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/cn/fbi_core.sh && chmod +x FBI 专属工具箱
 			else
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x FBI 专属工具箱
 			fi
 			canshu_v6
 			CheckFirstRun_true
 			yinsiyuanquan2
-			cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
+			cp -f ~/FBI 专属工具箱 /usr/local/bin/k > /dev/null 2>&1
 			echo -e "${gl_lv}脚本已更新到最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 			send_stats "脚本已经最新$sh_v_new"
 			break_end
-			~/fbi.sh
+			~/FBI 专属工具箱
 			exit
 			;;
 		2)
@@ -20238,14 +20238,14 @@ while true; do
 			local country=$(curl -s ipinfo.io/country)
 			local ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
 			if [ "$country" = "CN" ]; then
-				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./fbi.sh"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x FBI 专属工具箱 && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./FBI 专属工具箱"
 			elif [ -n "$ipv6_address" ]; then
-				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./fbi.sh"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x FBI 专属工具箱 && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./FBI 专属工具箱"
 			else
-				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh"
+				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x FBI 专属工具箱"
 			fi
 			check_crontab_installed
-			(crontab -l | grep -v "fbi.sh") | crontab -
+			(crontab -l | grep -v "FBI 专属工具箱") | crontab -
 			# (crontab -l 2>/dev/null; echo "0 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			(crontab -l 2>/dev/null; echo "$(shuf -i 0-59 -n 1) 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			echo -e "${gl_lv}自动更新已开启，每天凌晨2点脚本会自动更新！${gl_bai}"
@@ -20254,13 +20254,13 @@ while true; do
 			;;
 		3)
 			clear
-			(crontab -l | grep -v "fbi.sh") | crontab -
+			(crontab -l | grep -v "FBI 专属工具箱") | crontab -
 			echo -e "${gl_lv}自动更新已关闭${gl_bai}"
 			send_stats "关闭脚本自动更新"
 			break_end
 			;;
 		*)
-			fbi_sh
+			FBI 专属工具箱
 			;;
 	esac
 done
@@ -20271,7 +20271,7 @@ done
 
 
 
-fbi_sh() {
+FBI 专属工具箱() {
 while true; do
 clear
 echo -e "${gl_kjlan}"
@@ -20391,7 +20391,7 @@ echo "SSH公钥导入(GitHub) k sshkey github <user> "
 
 if [ "$#" -eq 0 ]; then
 	# 如果没有参数，运行交互式逻辑
-	fbi_sh
+	FBI 专属工具箱
 else
 	# 如果有参数，执行相应函数
 	case $1 in
