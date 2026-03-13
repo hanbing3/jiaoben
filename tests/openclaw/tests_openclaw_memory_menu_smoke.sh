@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-SCRIPT="$REPO_ROOT/fbi.sh"
+SCRIPT="$REPO_ROOT/kejilion.sh"
 WORKDIR="${TMPDIR:-/tmp}/openclaw-memory-menu-test-$$"
 mkdir -p "$WORKDIR/bin" "$WORKDIR/home/.openclaw/workspace/memory"
 KEEP_WORKDIR=${KEEP_WORKDIR:-false}

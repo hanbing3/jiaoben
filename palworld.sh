@@ -101,7 +101,7 @@ pal_start() {
 
 pal_backup() {
   cd ~
-  curl -sS -O https://fbi.pro/pal_backup.sh && chmod +x pal_backup.sh
+  curl -sS -O https://kejilion.pro/pal_backup.sh && chmod +x pal_backup.sh
 }
 
 pal_install_status() {
@@ -323,7 +323,7 @@ case $choice in
   10)
     clear
     tmux kill-session -t my1
-    cd ~ && curl -sS -O https://fbi.pro/PalWorldSettings.ini
+    cd ~ && curl -sS -O https://kejilion.pro/PalWorldSettings.ini
 
     echo "配置游戏参数"
     echo "------------------------"
@@ -416,16 +416,16 @@ case $choice in
 
   k)
     cd ~
-    curl -sS -O https://fbi.pro/fbi.sh && chmod +x fbi.sh && ./fbi.sh
+    curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejilion.sh
     exit
     ;;
 
   00)
     cd ~
-    curl -sS -O https://fbi.pro/pal_log.sh && chmod +x pal_log.sh && ./pal_log.sh
+    curl -sS -O https://kejilion.pro/pal_log.sh && chmod +x pal_log.sh && ./pal_log.sh
     rm pal_log.sh
     echo ""
-    curl -sS -O https://fbi.pro/palworld.sh && chmod +x palworld.sh
+    curl -sS -O https://kejilion.pro/palworld.sh && chmod +x palworld.sh
     echo "脚本已更新到最新版本！"
     break_end
     palworld

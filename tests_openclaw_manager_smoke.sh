@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-SCRIPT="$REPO_DIR/fbi.sh"
+SCRIPT="$REPO_DIR/kejilion.sh"
 WORKDIR="${TMPDIR:-/tmp}/openclaw-manager-test-$$"
 mkdir -p "$WORKDIR/bin" "$WORKDIR/home/.openclaw"
 trap 'rm -rf "$WORKDIR"' EXIT

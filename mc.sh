@@ -114,7 +114,7 @@ mc_start() {
 
 mc_backup() {
   cd ~
-  curl -sS -O https://fbi.pro/mc_backup.sh && chmod +x mc_backup.sh
+  curl -sS -O https://kejilion.pro/mc_backup.sh && chmod +x mc_backup.sh
 }
 
 mc_install_status() {
@@ -413,16 +413,16 @@ case $choice in
       ;;
   k)
     cd ~
-    curl -sS -O https://fbi.pro/fbi.sh && chmod +x fbi.sh && ./fbi.sh
+    curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejilion.sh
     exit
     ;;
 
   00)
     cd ~
-    curl -sS -O https://fbi.pro/mc_log.sh && chmod +x mc_log.sh && ./mc_log.sh
+    curl -sS -O https://kejilion.pro/mc_log.sh && chmod +x mc_log.sh && ./mc_log.sh
     rm mc_log.sh
     echo ""
-    curl -sS -O https://fbi.pro/mc.sh && chmod +x mc.sh
+    curl -sS -O https://kejilion.pro/mc.sh && chmod +x mc.sh
     echo "脚本已更新到最新版本！"
     break_end
     mc

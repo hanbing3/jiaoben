@@ -20,10 +20,10 @@ ENABLE_STATS="true"
 quanju_canshu() {
 if [ "$canshu" = "CN" ]; then
 	zhushi=0
-	gh_proxy="https://gh.fbi.pro/"
+	gh_proxy="https://gh.kejilion.pro/"
 elif [ "$canshu" = "V6" ]; then
 	zhushi=1
-	gh_proxy="https://gh.fbi.pro/"
+	gh_proxy="https://gh.kejilion.pro/"
 else
 	zhushi=1  # 0 表示执行，1 表示不执行
 	gh_proxy="https://"
@@ -46,14 +46,14 @@ run_command() {
 
 canshu_v6() {
 	if grep -q '^canshu="V6"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^canshu="default"/canshu="V6"/' ~/fbi.sh
+		sed -i 's/^canshu="default"/canshu="V6"/' ~/kejilion.sh
 	fi
 }
 
 
 CheckFirstRun_true() {
 	if grep -q '^permission_granted="true"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/kejilion.sh
 	fi
 }
 
@@ -75,7 +75,7 @@ send_stats() {
 	local cpu_arch=$(uname -m)
 
 	(
-		curl -s -X POST "https://api.fbi.pro/api/log" \
+		curl -s -X POST "https://api.kejilion.pro/api/log" \
 			-H "Content-Type: application/json" \
 			-d "{\"action\":\"$1\",\"timestamp\":\"$(date -u '+%Y-%m-%d %H:%M:%S')\",\"country\":\"$country\",\"os_info\":\"$os_info\",\"cpu_arch\":\"$cpu_arch\",\"version\":\"$sh_v\"}" \
 		&>/dev/null
@@ -87,7 +87,7 @@ send_stats() {
 yinsiyuanquan2() {
 
 if grep -q '^ENABLE_STATS="false"' /usr/local/bin/k > /dev/null 2>&1; then
-	sed -i 's/^ENABLE_STATS="true"/ENABLE_STATS="false"/' ~/fbi.sh
+	sed -i 's/^ENABLE_STATS="true"/ENABLE_STATS="false"/' ~/kejilion.sh
 fi
 
 }
@@ -102,8 +102,8 @@ yinsiyuanquan2
 sed -i '/^alias k=/d' ~/.bashrc > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.profile > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.bash_profile > /dev/null 2>&1
-cp -f ./fbi.sh ~/fbi.sh > /dev/null 2>&1
-cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
+cp -f ./kejilion.sh ~/kejilion.sh > /dev/null 2>&1
+cp -f ~/kejilion.sh /usr/local/bin/k > /dev/null 2>&1
 ln -sf /usr/local/bin/k /usr/bin/k > /dev/null 2>&1
 
 
@@ -119,14 +119,14 @@ UserLicenseAgreement() {
 	clear
 	echo -e "${gl_kjlan}歡迎使用科技lion腳本工具箱${gl_bai}"
 	echo "首次使用腳本，請先閱讀並同意使用者授權協議。"
-	echo "使用者授權協議: https://blog.fbi.pro/user-license-agreement/"
+	echo "使用者授權協議: https://blog.kejilion.pro/user-license-agreement/"
 	echo -e "----------------------"
 	read -e -p "是否同意以上條款？ (y/n):" user_input
 
 
 	if [ "$user_input" = "y" ] || [ "$user_input" = "Y" ]; then
 		send_stats "許可同意"
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/kejilion.sh
 		sed -i 's/^permission_granted="false"/permission_granted="true"/' /usr/local/bin/k
 	else
 		send_stats "許可拒絕"
@@ -356,7 +356,7 @@ break_end() {
 
 fbi() {
 			cd ~
-			fbi.sh
+			kejilion.sh
 }
 
 
@@ -401,7 +401,7 @@ if [ "$country" = "CN" ]; then
 	"https://hub2.nat.tf",
 	"https://hub3.nat.tf",
 	"https://docker.m.daocloud.io",
-	"https://docker.fbi.pro",
+	"https://docker.kejilion.pro",
 	"https://docker.367231.xyz",
 	"https://hub.1panel.dev",
 	"https://dockerproxy.cool",
@@ -1397,7 +1397,7 @@ install_ldnmp() {
 	  fix_phpfpm_conf php74
 
 	  # mysql調優
-	  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/custom_mysql_config-1.cnf
+	  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/custom_mysql_config-1.cnf
 	  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 	  rm -rf /home/custom_mysql_config.cnf
 
@@ -1417,7 +1417,7 @@ install_ldnmp() {
 install_certbot() {
 
 	cd ~
-	curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/auto_cert_renewal.sh
+	curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/auto_cert_renewal.sh
 	chmod +x auto_cert_renewal.sh
 
 	check_crontab_installed
@@ -2132,7 +2132,7 @@ web_security() {
 				  1)
 					  f2b_install_sshd
 					  cd /etc/fail2ban/filter.d
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/fail2ban-nginx-cc.conf
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/fail2ban-nginx-cc.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-418.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-deny.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-unauthorized.conf
@@ -2246,7 +2246,7 @@ web_security() {
 					  cd ~
 					  install jq bc
 					  check_crontab_installed
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/CF-Under-Attack.sh
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/CF-Under-Attack.sh
 					  chmod +x CF-Under-Attack.sh
 					  sed -i "s/AAAA/$cfuser/g" ~/CF-Under-Attack.sh
 					  sed -i "s/BBBB/$cftoken/g" ~/CF-Under-Attack.sh
@@ -2369,13 +2369,13 @@ web_optimization() {
 
 
 				  # php調優
-				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/optimized_php.ini
+				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/optimized_php.ini
 				  docker cp /home/optimized_php.ini php:/usr/local/etc/php/conf.d/optimized_php.ini
 				  docker cp /home/optimized_php.ini php74:/usr/local/etc/php/conf.d/optimized_php.ini
 				  rm -rf /home/optimized_php.ini
 
 				  # php調優
-				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/www-1.conf
+				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/www-1.conf
 				  docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
 				  docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
 				  rm -rf /home/www.conf
@@ -2387,7 +2387,7 @@ web_optimization() {
 				  fix_phpfpm_conf php74
 
 				  # mysql調優
-				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/custom_mysql_config-1.cnf
+				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/custom_mysql_config-1.cnf
 				  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 				  rm -rf /home/custom_mysql_config.cnf
 
@@ -2410,13 +2410,13 @@ web_optimization() {
 				  sed -i "s/worker_connections.*/worker_connections ${connections};/" /home/web/nginx.conf
 
 				  # php調優
-				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/optimized_php.ini
+				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/optimized_php.ini
 				  docker cp /home/optimized_php.ini php:/usr/local/etc/php/conf.d/optimized_php.ini
 				  docker cp /home/optimized_php.ini php74:/usr/local/etc/php/conf.d/optimized_php.ini
 				  rm -rf /home/optimized_php.ini
 
 				  # php調優
-				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/www.conf
+				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/www.conf
 				  docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
 				  docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
 				  rm -rf /home/www.conf
@@ -2428,7 +2428,7 @@ web_optimization() {
 				  fix_phpfpm_conf php74
 
 				  # mysql調優
-				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/custom_mysql_config.cnf
+				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/custom_mysql_config.cnf
 				  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 				  rm -rf /home/custom_mysql_config.cnf
 
@@ -3246,7 +3246,7 @@ f2b_basic_config() {
 	mkdir -p /etc/fail2ban/jail.d
 	cat > /etc/fail2ban/jail.d/sshd.local <<EOF
 [$jail_name]
-# Managed by fbi.sh
+# Managed by kejilion.sh
 # Note: enable the jail so these parameters take effect
 enabled = true
 bantime = $bantime
@@ -5127,7 +5127,7 @@ sshkey_panel() {
 	  	  IS_KEY_ENABLED="${gl_hui}未啟用${gl_bai}"
 	  fi
   	  echo -e "使用者密鑰登入模式${IS_KEY_ENABLED}"
-  	  echo "進階玩法: https://blog.fbi.pro/ssh-key"
+  	  echo "進階玩法: https://blog.kejilion.pro/ssh-key"
   	  echo "------------------------------------------------"
   	  echo "將會產生金鑰對，更安全的方式SSH登錄"
 	  echo "------------------------"
@@ -5620,13 +5620,13 @@ bbrv3() {
 						update-grub
 
 						# wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-						wget -qO - ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+						wget -qO - ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
 						# 步驟3：新增儲存庫
 						echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
 						# version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-						local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+						local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
 						apt update -y
 						apt install -y linux-xanmod-x64v$version
@@ -5682,13 +5682,13 @@ bbrv3() {
 			install wget gnupg
 
 			# wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-			wget -qO - ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+			wget -qO - ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
 			# 步驟3：新增儲存庫
 			echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
 			# version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-			local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+			local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
 			apt update -y
 			apt install -y linux-xanmod-x64v$version
@@ -6340,14 +6340,14 @@ Kernel_optimize() {
 			  cd ~
 			  clear
 			  restore_defaults
-			  curl -sS ${gh_proxy}raw.githubusercontent.com/fbi.sh/refs/heads/main/network-optimize.sh -o /tmp/network-optimize.sh && source /tmp/network-optimize.sh && restore_network_defaults
+			  curl -sS ${gh_proxy}raw.githubusercontent.com/kejilion.sh/refs/heads/main/network-optimize.sh -o /tmp/network-optimize.sh && source /tmp/network-optimize.sh && restore_network_defaults
 			  send_stats "還原預設設定"
 			  ;;
 
 		  7)
 			  cd ~
 			  clear
-			  curl -sS ${gh_proxy}raw.githubusercontent.com/fbi.sh/refs/heads/main/network-optimize.sh | bash
+			  curl -sS ${gh_proxy}raw.githubusercontent.com/kejilion.sh/refs/heads/main/network-optimize.sh | bash
 			  send_stats "核心自動調優"
 			  ;;
 
@@ -9639,7 +9639,7 @@ linux_ldnmp() {
 	  read -e -p "輸入遠端伺服器密碼:" usepasswd
 
 	  cd ~
-	  wget -O ${useip}_beifen.sh ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/beifen.sh > /dev/null 2>&1
+	  wget -O ${useip}_beifen.sh ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/beifen.sh > /dev/null 2>&1
 	  chmod +x ${useip}_beifen.sh
 
 	  sed -i "s/0.0.0.0/$useip/g" ${useip}_beifen.sh
@@ -10836,7 +10836,7 @@ while true; do
 	  echo -e "${gl_kjlan}113. ${color113}Firefox瀏覽器${gl_kjlan}114. ${color114}ClawdBot/Moltbot機器人${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}-------------------------"
 	  echo -e "${gl_kjlan}第三方應用程式列表"
-  	  echo -e "${gl_kjlan}想要讓你的應用程式出現在這裡？查看開發者指南:${gl_huang}https://dev.fbi.sh/${gl_bai}"
+  	  echo -e "${gl_kjlan}想要讓你的應用程式出現在這裡？查看開發者指南:${gl_huang}https://dev.kejilion.sh/${gl_bai}"
 
 	  for f in "$HOME"/apps/*.conf; do
 		  [ -e "$f" ] || continue
@@ -15997,7 +15997,7 @@ EOF
 
 				  case $host_dns in
 					  1)
-						  read -e -p "請輸入新的解析記錄 格式: 110.25.5.33 fbi.pro :" addhost
+						  read -e -p "請輸入新的解析記錄 格式: 110.25.5.33 kejilion.pro :" addhost
 						  echo "$addhost" >> /etc/hosts
 						  send_stats "本機host解析新增"
 
@@ -16065,7 +16065,7 @@ EOF
 					cz_day=${cz_day:-1}
 
 					cd ~
-					curl -Ss -o ~/Limiting_Shut_down.sh ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/Limiting_Shut_down1.sh
+					curl -Ss -o ~/Limiting_Shut_down.sh ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/Limiting_Shut_down1.sh
 					chmod +x ~/Limiting_Shut_down.sh
 					sed -i "s/110/$rx_threshold_gb/g" ~/Limiting_Shut_down.sh
 					sed -i "s/120/$tx_threshold_gb/g" ~/Limiting_Shut_down.sh
@@ -16117,7 +16117,7 @@ EOF
 					  chmod +x ~/TG-check-notify.sh
 					  nano ~/TG-check-notify.sh
 				  else
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/TG-check-notify.sh
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/TG-check-notify.sh
 					  chmod +x ~/TG-check-notify.sh
 					  nano ~/TG-check-notify.sh
 				  fi
@@ -16126,7 +16126,7 @@ EOF
 				  crontab -l | grep -v '~/TG-check-notify.sh' | crontab - > /dev/null 2>&1
 				  (crontab -l ; echo "@reboot tmux new -d -s TG-check-notify '~/TG-check-notify.sh'") | crontab - > /dev/null 2>&1
 
-				  curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/TG-SSH-check-notify.sh > /dev/null 2>&1
+				  curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/TG-SSH-check-notify.sh > /dev/null 2>&1
 				  sed -i "3i$(grep '^TELEGRAM_BOT_TOKEN=' ~/TG-check-notify.sh)" TG-SSH-check-notify.sh > /dev/null 2>&1
 				  sed -i "4i$(grep '^CHAT_ID=' ~/TG-check-notify.sh)" TG-SSH-check-notify.sh
 				  chmod +x ~/TG-SSH-check-notify.sh
@@ -16158,7 +16158,7 @@ EOF
 			  root_use
 			  send_stats "修復SSH高風險漏洞"
 			  cd ~
-			  curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/upgrade_openssh9.8p1.sh
+			  curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/upgrade_openssh9.8p1.sh
 			  chmod +x ~/upgrade_openssh9.8p1.sh
 			  ~/upgrade_openssh9.8p1.sh
 			  rm -f ~/upgrade_openssh9.8p1.sh
@@ -16241,8 +16241,8 @@ EOF
 			clear
 			send_stats "留言板"
 			echo "造訪科技lion官方留言板，您對腳本有任何想法歡迎留言交流！"
-			echo "https://board.fbi.pro"
-			echo "公共密碼: fbi.sh"
+			echo "https://board.kejilion.pro"
+			echo "公共密碼: kejilion.sh"
 			  ;;
 
 		  66)
@@ -16317,7 +16317,7 @@ EOF
 				  echo -e "[${gl_lv}OK${gl_bai}] 11/12. 安裝基礎工具${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
 				  echo "------------------------------------------------"
 
-				  curl -sS ${gh_proxy}raw.githubusercontent.com/fbi.sh/refs/heads/main/network-optimize.sh | bash
+				  curl -sS ${gh_proxy}raw.githubusercontent.com/kejilion.sh/refs/heads/main/network-optimize.sh | bash
 				  echo -e "[${gl_lv}OK${gl_bai}] 12/12. Linux系統核心參數最佳化"
 				  echo -e "${gl_lv}一條龍系統調優已完成${gl_bai}"
 
@@ -16366,14 +16366,14 @@ EOF
 				  1)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/fbi.sh
+					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/kejilion.sh
 					  echo "已開啟擷取"
 					  send_stats "隱私與安全已開啟擷取"
 					  ;;
 				  2)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="true"/ENABLE_STATS="false"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="true"/ENABLE_STATS="false"/' ~/fbi.sh
+					  sed -i 's/^ENABLE_STATS="true"/ENABLE_STATS="false"/' ~/kejilion.sh
 					  echo "已關閉採集"
 					  send_stats "隱私與安全已關閉採集"
 					  ;;
@@ -16400,9 +16400,9 @@ EOF
 			  case "$choice" in
 				[Yy])
 				  clear
-				  (crontab -l | grep -v "fbi.sh") | crontab -
+				  (crontab -l | grep -v "kejilion.sh") | crontab -
 				  rm -f /usr/local/bin/k
-				  rm ~/fbi.sh
+				  rm ~/kejilion.sh
 				  echo "腳本已卸載，再見！"
 				  break_end
 				  clear
@@ -16823,7 +16823,7 @@ echo -e "${gl_zi}V.PS 6.9刀每月 東京軟銀 2核心 1G內存 20G硬碟 1T流
 echo -e "${gl_bai}網址: https://vps.hosting/cart/tokyo-cloud-kvm-vps/?id=148&?affid=1355&?affid=1355${gl_bai}"
 echo "------------------------"
 echo -e "${gl_kjlan}VPS更多熱門優惠${gl_bai}"
-echo -e "${gl_bai}網址: https://fbi.pro/topvps/${gl_bai}"
+echo -e "${gl_bai}網址: https://kejilion.pro/topvps/${gl_bai}"
 echo "------------------------"
 echo ""
 echo -e "網域優惠"
@@ -16835,10 +16835,10 @@ echo ""
 echo -e "科技lion週邊"
 echo "------------------------"
 echo -e "${gl_kjlan}B站:${gl_bai}https://b23.tv/2mqnQyh              ${gl_kjlan}油管:${gl_bai}https://www.youtube.com/@fbi${gl_bai}"
-echo -e "${gl_kjlan}官網:${gl_bai}https://fbi.pro/              ${gl_kjlan}導航:${gl_bai}https://dh.fbi.pro/${gl_bai}"
-echo -e "${gl_kjlan}部落格:${gl_bai}https://blog.fbi.pro/         ${gl_kjlan}軟體中心:${gl_bai}https://app.fbi.pro/${gl_bai}"
+echo -e "${gl_kjlan}官網:${gl_bai}https://kejilion.pro/              ${gl_kjlan}導航:${gl_bai}https://dh.kejilion.pro/${gl_bai}"
+echo -e "${gl_kjlan}部落格:${gl_bai}https://blog.kejilion.pro/         ${gl_kjlan}軟體中心:${gl_bai}https://app.kejilion.pro/${gl_bai}"
 echo "------------------------"
-echo -e "${gl_kjlan}腳本官網:${gl_bai}https://fbi.sh            ${gl_kjlan}GitHub地址:${gl_bai}${gh_https_url}github.com/fbi.sh${gl_bai}"
+echo -e "${gl_kjlan}腳本官網:${gl_bai}https://kejilion.sh            ${gl_kjlan}GitHub地址:${gl_bai}${gh_https_url}github.com/kejilion.sh${gl_bai}"
 echo "------------------------"
 echo ""
 }
@@ -16862,11 +16862,11 @@ games_server_tools() {
 	  case $sub_choice in
 
 		  1) send_stats "幻獸帕魯開服腳本" ; cd ~
-			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/palworld.sh ; chmod +x palworld.sh ; ./palworld.sh
+			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/palworld.sh ; chmod +x palworld.sh ; ./palworld.sh
 			 exit
 			 ;;
 		  2) send_stats "我的世界開服腳本" ; cd ~
-			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/mc.sh ; chmod +x mc.sh ; ./mc.sh
+			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/mc.sh ; chmod +x mc.sh ; ./mc.sh
 			 exit
 			 ;;
 
@@ -16913,11 +16913,11 @@ while true; do
 	clear
 	echo "更新日誌"
 	echo "------------------------"
-	echo "全部日誌:${gh_proxy}raw.githubusercontent.com/fbi.sh/main/fbi.sh_log.txt"
+	echo "全部日誌:${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/kejilion.sh_log.txt"
 	echo "------------------------"
 
-	curl -s ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/fbi.sh_log.txt | tail -n 30
-	local sh_v_new=$(curl -s ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/fbi.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
+	curl -s ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/kejilion.sh_log.txt | tail -n 30
+	local sh_v_new=$(curl -s ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/kejilion.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
 
 	if [ "$sh_v" = "$sh_v_new" ]; then
 		echo -e "${gl_lv}你已經是最新版本！${gl_huang}v$sh_v${gl_bai}"
@@ -16928,7 +16928,7 @@ while true; do
 	fi
 
 
-	local cron_job="fbi.sh"
+	local cron_job="kejilion.sh"
 	local existing_cron=$(crontab -l 2>/dev/null | grep -F "$cron_job")
 
 	if [ -n "$existing_cron" ]; then
@@ -16947,18 +16947,18 @@ while true; do
 			clear
 			local country=$(curl -s ipinfo.io/country)
 			if [ "$country" = "CN" ]; then
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/cn/fbi.sh && chmod +x fbi.sh
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/cn/kejilion.sh && chmod +x kejilion.sh
 			else
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/fbi.sh/main/fbi.sh && chmod +x fbi.sh
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/kejilion.sh/main/kejilion.sh && chmod +x kejilion.sh
 			fi
 			canshu_v6
 			CheckFirstRun_true
 			yinsiyuanquan2
-			cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
+			cp -f ~/kejilion.sh /usr/local/bin/k > /dev/null 2>&1
 			echo -e "${gl_lv}腳本已更新至最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 			send_stats "腳本已經最新$sh_v_new"
 			break_end
-			~/fbi.sh
+			~/kejilion.sh
 			exit
 			;;
 		2)
@@ -16966,14 +16966,14 @@ while true; do
 			local country=$(curl -s ipinfo.io/country)
 			local ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
 			if [ "$country" = "CN" ]; then
-				SH_Update_task="curl -sS -O https://gh.fbi.pro/raw.githubusercontent.com/fbi.sh/main/fbi.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./fbi.sh"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/kejilion.sh/main/kejilion.sh && chmod +x kejilion.sh && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./kejilion.sh"
 			elif [ -n "$ipv6_address" ]; then
-				SH_Update_task="curl -sS -O https://gh.fbi.pro/raw.githubusercontent.com/fbi.sh/main/fbi.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./fbi.sh"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/kejilion.sh/main/kejilion.sh && chmod +x kejilion.sh && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./kejilion.sh"
 			else
-				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/fbi.sh/main/fbi.sh && chmod +x fbi.sh"
+				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/kejilion.sh/main/kejilion.sh && chmod +x kejilion.sh"
 			fi
 			check_crontab_installed
-			(crontab -l | grep -v "fbi.sh") | crontab -
+			(crontab -l | grep -v "kejilion.sh") | crontab -
 			# (crontab -l 2>/dev/null; echo "0 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			(crontab -l 2>/dev/null; echo "$(shuf -i 0-59 -n 1) 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			echo -e "${gl_lv}自動更新已開啟，每天凌晨2點腳本會自動更新！${gl_bai}"
@@ -16982,13 +16982,13 @@ while true; do
 			;;
 		3)
 			clear
-			(crontab -l | grep -v "fbi.sh") | crontab -
+			(crontab -l | grep -v "kejilion.sh") | crontab -
 			echo -e "${gl_lv}自動更新已關閉${gl_bai}"
 			send_stats "關閉腳本自動更新"
 			break_end
 			;;
 		*)
-			fbi.sh
+			kejilion.sh
 			;;
 	esac
 done
@@ -16999,7 +16999,7 @@ done
 
 
 
-fbi.sh() {
+kejilion.sh() {
 while true; do
 clear
 echo -e "${gl_kjlan}"
@@ -17119,7 +17119,7 @@ echo "SSH公鑰導入(GitHub) k sshkey github <user>"
 
 if [ "$#" -eq 0 ]; then
 	# 如果沒有參數，運行互動式邏輯
-	fbi.sh
+	kejilion.sh
 else
 	# 如果有參數，執行對應函數
 	case $1 in
