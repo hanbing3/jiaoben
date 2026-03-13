@@ -46,14 +46,14 @@ run_command() {
 
 canshu_v6() {
 	if grep -q '^canshu="V6"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^canshu="default"/canshu="V6"/' ~/FBI
+		sed -i 's/^canshu="default"/canshu="V6"/' ~/fbi.sh
 	fi
 }
 
 
 CheckFirstRun_true() {
 	if grep -q '^permission_granted="true"' /usr/local/bin/k > /dev/null 2>&1; then
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/FBI
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
 	fi
 }
 
@@ -87,7 +87,7 @@ send_stats() {
 yinsiyuanquan2() {
 
 if grep -q '^ENABLE_STATS="false"' /usr/local/bin/k > /dev/null 2>&1; then
-	sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI
+	sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
 fi
 
 }
@@ -102,8 +102,8 @@ yinsiyuanquan2
 sed -i '/^alias k=/d' ~/.bashrc > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.profile > /dev/null 2>&1
 sed -i '/^alias k=/d' ~/.bash_profile > /dev/null 2>&1
-cp -f ./FBI ~/FBI > /dev/null 2>&1
-cp -f ~/FBI /usr/local/bin/k > /dev/null 2>&1
+cp -f ./fbi.sh ~/fbi.sh > /dev/null 2>&1
+cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
 ln -sf /usr/local/bin/k /usr/bin/k > /dev/null 2>&1
 
 
@@ -126,7 +126,7 @@ UserLicenseAgreement() {
 
 	if [ "$user_input" = "y" ] || [ "$user_input" = "Y" ]; then
 		send_stats "许可同意"
-		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/FBI
+		sed -i 's/^permission_granted="false"/permission_granted="true"/' ~/fbi.sh
 		sed -i 's/^permission_granted="false"/permission_granted="true"/' /usr/local/bin/k
 	else
 		send_stats "许可拒绝"
@@ -356,7 +356,7 @@ break_end() {
 
 fbi() {
 			cd ~
-			FBI
+			fbi_sh
 }
 
 
@@ -1397,7 +1397,7 @@ install_ldnmp() {
 	  fix_phpfpm_conf php74
 
 	  # mysql调优
-	  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/FBI/main/custom_mysql_config-1.cnf
+	  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/custom_mysql_config-1.cnf
 	  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 	  rm -rf /home/custom_mysql_config.cnf
 
@@ -1417,7 +1417,7 @@ install_ldnmp() {
 install_certbot() {
 
 	cd ~
-	curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/auto_cert_renewal.sh
+	curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/auto_cert_renewal.sh
 	chmod +x auto_cert_renewal.sh
 
 	check_crontab_installed
@@ -2132,7 +2132,7 @@ web_security() {
 				  1)
 					  f2b_install_sshd
 					  cd /etc/fail2ban/filter.d
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/fail2ban-nginx-cc.conf
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fail2ban-nginx-cc.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-418.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-deny.conf
 					  wget ${gh_proxy}raw.githubusercontent.com/linuxserver/fail2ban-confs/master/filter.d/nginx-unauthorized.conf
@@ -2246,7 +2246,7 @@ web_security() {
 					  cd ~
 					  install jq bc
 					  check_crontab_installed
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/CF-Under-Attack.sh
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/CF-Under-Attack.sh
 					  chmod +x CF-Under-Attack.sh
 					  sed -i "s/AAAA/$cfuser/g" ~/CF-Under-Attack.sh
 					  sed -i "s/BBBB/$cftoken/g" ~/CF-Under-Attack.sh
@@ -2369,13 +2369,13 @@ web_optimization() {
 
 
 				  # php调优
-				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/FBI/main/optimized_php.ini
+				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/optimized_php.ini
 				  docker cp /home/optimized_php.ini php:/usr/local/etc/php/conf.d/optimized_php.ini
 				  docker cp /home/optimized_php.ini php74:/usr/local/etc/php/conf.d/optimized_php.ini
 				  rm -rf /home/optimized_php.ini
 
 				  # php调优
-				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/FBI/main/www-1.conf
+				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/www-1.conf
 				  docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
 				  docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
 				  rm -rf /home/www.conf
@@ -2387,7 +2387,7 @@ web_optimization() {
 				  fix_phpfpm_conf php74
 
 				  # mysql调优
-				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/FBI/main/custom_mysql_config-1.cnf
+				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/custom_mysql_config-1.cnf
 				  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 				  rm -rf /home/custom_mysql_config.cnf
 
@@ -2410,13 +2410,13 @@ web_optimization() {
 				  sed -i "s/worker_connections.*/worker_connections ${connections};/" /home/web/nginx.conf
 
 				  # php调优
-				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/FBI/main/optimized_php.ini
+				  wget -O /home/optimized_php.ini ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/optimized_php.ini
 				  docker cp /home/optimized_php.ini php:/usr/local/etc/php/conf.d/optimized_php.ini
 				  docker cp /home/optimized_php.ini php74:/usr/local/etc/php/conf.d/optimized_php.ini
 				  rm -rf /home/optimized_php.ini
 
 				  # php调优
-				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/FBI/main/www.conf
+				  wget -O /home/www.conf ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/www.conf
 				  docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
 				  docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
 				  rm -rf /home/www.conf
@@ -2428,7 +2428,7 @@ web_optimization() {
 				  fix_phpfpm_conf php74
 
 				  # mysql调优
-				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/FBI/main/custom_mysql_config.cnf
+				  wget -O /home/custom_mysql_config.cnf ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/custom_mysql_config.cnf
 				  docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
 				  rm -rf /home/custom_mysql_config.cnf
 
@@ -3246,7 +3246,7 @@ f2b_basic_config() {
 	mkdir -p /etc/fail2ban/jail.d
 	cat > /etc/fail2ban/jail.d/sshd.local <<EOF
 [$jail_name]
-# Managed by FBI
+# Managed by fbi.sh
 # Note: enable the jail so these parameters take effect
 enabled = true
 bantime = $bantime
@@ -5620,13 +5620,13 @@ bbrv3() {
 						update-grub
 
 						# wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-						wget -qO - ${gh_proxy}raw.githubusercontent.com/FBI/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+						wget -qO - ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
 						# 步骤3：添加存储库
 						echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
 						# version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-						local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/FBI/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+						local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
 						apt update -y
 						apt install -y linux-xanmod-x64v$version
@@ -5682,13 +5682,13 @@ bbrv3() {
 			install wget gnupg
 
 			# wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-			wget -qO - ${gh_proxy}raw.githubusercontent.com/FBI/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+			wget -qO - ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
 			# 步骤3：添加存储库
 			echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
 			# version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-			local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/FBI/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+			local version=$(wget -q ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
 			apt update -y
 			apt install -y linux-xanmod-x64v$version
@@ -6340,14 +6340,14 @@ Kernel_optimize() {
 			  cd ~
 			  clear
 			  restore_defaults
-			  curl -sS ${gh_proxy}raw.githubusercontent.com/FBI/refs/heads/main/network-optimize.sh -o /tmp/network-optimize.sh && source /tmp/network-optimize.sh && restore_network_defaults
+			  curl -sS ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/refs/heads/main/network-optimize.sh -o /tmp/network-optimize.sh && source /tmp/network-optimize.sh && restore_network_defaults
 			  send_stats "还原默认设置"
 			  ;;
 
 		  7)
 			  cd ~
 			  clear
-			  curl -sS ${gh_proxy}raw.githubusercontent.com/FBI/refs/heads/main/network-optimize.sh | bash
+			  curl -sS ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/refs/heads/main/network-optimize.sh | bash
 			  send_stats "内核自动调优"
 			  ;;
 
@@ -9727,7 +9727,7 @@ linux_ldnmp() {
 	  read -e -p "输入远程服务器密码: " usepasswd
 
 	  cd ~
-	  wget -O ${useip}_beifen.sh ${gh_proxy}raw.githubusercontent.com/FBI/main/beifen.sh > /dev/null 2>&1
+	  wget -O ${useip}_beifen.sh ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/beifen.sh > /dev/null 2>&1
 	  chmod +x ${useip}_beifen.sh
 
 	  sed -i "s/0.0.0.0/$useip/g" ${useip}_beifen.sh
@@ -14126,7 +14126,7 @@ while true; do
 	  echo -e "${gl_kjlan}113. ${color113}Firefox浏览器                       ${gl_kjlan}114. ${color114}OpenClaw机器人管理工具${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}-------------------------"
 	  echo -e "${gl_kjlan}第三方应用列表"
-  	  echo -e "${gl_kjlan}想要让你的应用出现在这里？查看开发者指南: ${gl_huang}https://dev.FBI/${gl_bai}"
+  	  echo -e "${gl_kjlan}想要让你的应用出现在这里？查看开发者指南: ${gl_huang}https://dev.fbi.sh/${gl_bai}"
 
 	  for f in "$HOME"/apps/*.conf; do
 		  [ -e "$f" ] || continue
@@ -19350,7 +19350,7 @@ EOF
 					cz_day=${cz_day:-1}
 
 					cd ~
-					curl -Ss -o ~/Limiting_Shut_down.sh ${gh_proxy}raw.githubusercontent.com/FBI/main/Limiting_Shut_down1.sh
+					curl -Ss -o ~/Limiting_Shut_down.sh ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/Limiting_Shut_down1.sh
 					chmod +x ~/Limiting_Shut_down.sh
 					sed -i "s/110/$rx_threshold_gb/g" ~/Limiting_Shut_down.sh
 					sed -i "s/120/$tx_threshold_gb/g" ~/Limiting_Shut_down.sh
@@ -19402,7 +19402,7 @@ EOF
 					  chmod +x ~/TG-check-notify.sh
 					  nano ~/TG-check-notify.sh
 				  else
-					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/TG-check-notify.sh
+					  curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/TG-check-notify.sh
 					  chmod +x ~/TG-check-notify.sh
 					  nano ~/TG-check-notify.sh
 				  fi
@@ -19411,7 +19411,7 @@ EOF
 				  crontab -l | grep -v '~/TG-check-notify.sh' | crontab - > /dev/null 2>&1
 				  (crontab -l ; echo "@reboot tmux new -d -s TG-check-notify '~/TG-check-notify.sh'") | crontab - > /dev/null 2>&1
 
-				  curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/TG-SSH-check-notify.sh > /dev/null 2>&1
+				  curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/TG-SSH-check-notify.sh > /dev/null 2>&1
 				  sed -i "3i$(grep '^TELEGRAM_BOT_TOKEN=' ~/TG-check-notify.sh)" TG-SSH-check-notify.sh > /dev/null 2>&1
 				  sed -i "4i$(grep '^CHAT_ID=' ~/TG-check-notify.sh)" TG-SSH-check-notify.sh
 				  chmod +x ~/TG-SSH-check-notify.sh
@@ -19443,7 +19443,7 @@ EOF
 			  root_use
 			  send_stats "修复SSH高危漏洞"
 			  cd ~
-			  curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/upgrade_openssh9.8p1.sh
+			  curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/upgrade_openssh9.8p1.sh
 			  chmod +x ~/upgrade_openssh9.8p1.sh
 			  ~/upgrade_openssh9.8p1.sh
 			  rm -f ~/upgrade_openssh9.8p1.sh
@@ -19527,7 +19527,7 @@ EOF
 			send_stats "留言板"
 			echo "访问科技lion官方留言板，您对脚本有任何想法欢迎留言交流！"
 			echo "https://board.kejilion.pro"
-			echo "公共密码: FBI"
+			echo "公共密码: fbi.sh"
 			  ;;
 
 		  66)
@@ -19602,7 +19602,7 @@ EOF
 				  echo -e "[${gl_lv}OK${gl_bai}] 11/12. 安装基础工具${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
 				  echo "------------------------------------------------"
 
-				  curl -sS ${gh_proxy}raw.githubusercontent.com/FBI/refs/heads/main/network-optimize.sh | bash
+				  curl -sS ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/refs/heads/main/network-optimize.sh | bash
 				  echo -e "[${gl_lv}OK${gl_bai}] 12/12. Linux系统内核参数优化"
 				  echo -e "${gl_lv}一条龙系统调优已完成${gl_bai}"
 
@@ -19651,14 +19651,14 @@ EOF
 				  1)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI
+					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
 					  echo "已开启采集"
 					  send_stats "隐私与安全已开启采集"
 					  ;;
 				  2)
 					  cd ~
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' /usr/local/bin/k
-					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/FBI
+					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="false"/' ~/fbi.sh
 					  echo "已关闭采集"
 					  send_stats "隐私与安全已关闭采集"
 					  ;;
@@ -19685,9 +19685,9 @@ EOF
 			  case "$choice" in
 				[Yy])
 				  clear
-				  (crontab -l | grep -v "FBI") | crontab -
+				  (crontab -l | grep -v "fbi.sh") | crontab -
 				  rm -f /usr/local/bin/k
-				  rm ~/FBI
+				  rm ~/fbi.sh
 				  echo "脚本已卸载，再见！"
 				  break_end
 				  clear
@@ -20110,7 +20110,7 @@ echo -e "${gl_kjlan}B站: ${gl_bai}https://b23.tv/2mqnQyh              ${gl_kjla
 echo -e "${gl_kjlan}官网: ${gl_bai}https://kejilion.pro/              ${gl_kjlan}导航: ${gl_bai}https://dh.kejilion.pro/${gl_bai}"
 echo -e "${gl_kjlan}博客: ${gl_bai}https://blog.kejilion.pro/         ${gl_kjlan}软件中心: ${gl_bai}https://app.kejilion.pro/${gl_bai}"
 echo "------------------------"
-echo -e "${gl_kjlan}脚本官网: ${gl_bai}https://FBI            ${gl_kjlan}GitHub地址: ${gl_bai}${gh_https_url}github.com/FBI${gl_bai}"
+echo -e "${gl_kjlan}脚本官网: ${gl_bai}https://fbi.sh            ${gl_kjlan}GitHub地址: ${gl_bai}${gh_https_url}github.com/hanbing3/jiaoben${gl_bai}"
 echo "------------------------"
 echo ""
 }
@@ -20134,11 +20134,11 @@ games_server_tools() {
 	  case $sub_choice in
 
 		  1) send_stats "幻兽帕鲁开服脚本" ; cd ~
-			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/palworld.sh ; chmod +x palworld.sh ; ./palworld.sh
+			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/palworld.sh ; chmod +x palworld.sh ; ./palworld.sh
 			 exit
 			 ;;
 		  2) send_stats "我的世界开服脚本" ; cd ~
-			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/mc.sh ; chmod +x mc.sh ; ./mc.sh
+			 curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/mc.sh ; chmod +x mc.sh ; ./mc.sh
 			 exit
 			 ;;
 
@@ -20185,11 +20185,11 @@ while true; do
 	clear
 	echo "更新日志"
 	echo "------------------------"
-	echo "全部日志: ${gh_proxy}raw.githubusercontent.com/FBI/main/FBI_log.txt"
+	echo "全部日志: ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh_log.txt"
 	echo "------------------------"
 
-	curl -s ${gh_proxy}raw.githubusercontent.com/FBI/main/FBI_log.txt | tail -n 30
-	local sh_v_new=$(curl -s ${gh_proxy}raw.githubusercontent.com/FBI/main/FBI | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
+	curl -s ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh_log.txt | tail -n 30
+	local sh_v_new=$(curl -s ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
 
 	if [ "$sh_v" = "$sh_v_new" ]; then
 		echo -e "${gl_lv}你已经是最新版本！${gl_huang}v$sh_v${gl_bai}"
@@ -20200,7 +20200,7 @@ while true; do
 	fi
 
 
-	local cron_job="FBI"
+	local cron_job="fbi.sh"
 	local existing_cron=$(crontab -l 2>/dev/null | grep -F "$cron_job")
 
 	if [ -n "$existing_cron" ]; then
@@ -20219,18 +20219,18 @@ while true; do
 			clear
 			local country=$(curl -s ipinfo.io/country)
 			if [ "$country" = "CN" ]; then
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/cn/FBI && chmod +x FBI
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/cn/fbi_core.sh && chmod +x fbi.sh
 			else
-				curl -sS -O ${gh_proxy}raw.githubusercontent.com/FBI/main/FBI && chmod +x FBI
+				curl -sS -O ${gh_proxy}raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh
 			fi
 			canshu_v6
 			CheckFirstRun_true
 			yinsiyuanquan2
-			cp -f ~/FBI /usr/local/bin/k > /dev/null 2>&1
+			cp -f ~/fbi.sh /usr/local/bin/k > /dev/null 2>&1
 			echo -e "${gl_lv}脚本已更新到最新版本！${gl_huang}v$sh_v_new${gl_bai}"
 			send_stats "脚本已经最新$sh_v_new"
 			break_end
-			~/FBI
+			~/fbi.sh
 			exit
 			;;
 		2)
@@ -20238,14 +20238,14 @@ while true; do
 			local country=$(curl -s ipinfo.io/country)
 			local ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
 			if [ "$country" = "CN" ]; then
-				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/FBI/main/FBI && chmod +x FBI && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./FBI"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"CN\"/g' ./fbi.sh"
 			elif [ -n "$ipv6_address" ]; then
-				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/FBI/main/FBI && chmod +x FBI && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./FBI"
+				SH_Update_task="curl -sS -O https://gh.kejilion.pro/raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh && sed -i 's/canshu=\"default\"/canshu=\"V6\"/g' ./fbi.sh"
 			else
-				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/FBI/main/FBI && chmod +x FBI"
+				SH_Update_task="curl -sS -O https://raw.githubusercontent.com/hanbing3/jiaoben/main/fbi_core.sh && chmod +x fbi.sh"
 			fi
 			check_crontab_installed
-			(crontab -l | grep -v "FBI") | crontab -
+			(crontab -l | grep -v "fbi.sh") | crontab -
 			# (crontab -l 2>/dev/null; echo "0 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			(crontab -l 2>/dev/null; echo "$(shuf -i 0-59 -n 1) 2 * * * bash -c \"$SH_Update_task\"") | crontab -
 			echo -e "${gl_lv}自动更新已开启，每天凌晨2点脚本会自动更新！${gl_bai}"
@@ -20254,13 +20254,13 @@ while true; do
 			;;
 		3)
 			clear
-			(crontab -l | grep -v "FBI") | crontab -
+			(crontab -l | grep -v "fbi.sh") | crontab -
 			echo -e "${gl_lv}自动更新已关闭${gl_bai}"
 			send_stats "关闭脚本自动更新"
 			break_end
 			;;
 		*)
-			FBI
+			fbi_sh
 			;;
 	esac
 done
@@ -20271,7 +20271,7 @@ done
 
 
 
-FBI() {
+fbi_sh() {
 while true; do
 clear
 echo -e "${gl_kjlan}"
@@ -20391,7 +20391,7 @@ echo "SSH公钥导入(GitHub) k sshkey github <user> "
 
 if [ "$#" -eq 0 ]; then
 	# 如果没有参数，运行交互式逻辑
-	FBI
+	fbi_sh
 else
 	# 如果有参数，执行相应函数
 	case $1 in
